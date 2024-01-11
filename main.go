@@ -9,8 +9,8 @@ import (
 const (
 	normalMode DisplayMode = iota
 	heightMode
-	defaultDisplayMode = normalMode
-	displayGrid        = false
+	defaultDisplayMode = heightMode
+	displayGrid        = true
 	tileCharacterWidth = 3
 )
 
@@ -28,6 +28,7 @@ type World struct {
 	Width   int
 	Tiles   [][]Tile
 	tilePad int
+	HeightMap ap.Matrix
 }
 
 var modeProcessors = map[DisplayMode]stringProcessor{
@@ -45,6 +46,9 @@ func (w *World) Initialize(height, width int) {
 	w.Height = height
 	w.Width = width
 	w.tilePad = 3
+	w.HeightMap := ap.Matrix{}
+	w.HeightMap.Build()
+	ap.Display2DArray(w.HeightMap)
 	for y := 1; y <= w.Height; y++ {
 		currentRow := []Tile{}
 		for x := 1; x <= w.Width; x++ {
@@ -104,6 +108,11 @@ func heightModeProcessor(tile Tile) string {
 	return displayString
 }
 
-func (w *World) Update() {
+func (w *World) Smooth() {
 
+}
+
+func modCheck() {
+	anArray := ap.Matrix{}
+	anArray.
 }
